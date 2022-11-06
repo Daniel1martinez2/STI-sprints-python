@@ -43,9 +43,11 @@ def sprint_2_endpoint():
         "similarity": similarity,
     })
 
-    # print(similarity)
-    # return json.dumps(sprint_3(row_frame_A, data, 4))
 
-
+@app.route("/sprint-3", methods=["GET"])
+def sprint_3_endpoint():
+    args = request.args.to_dict()
+    row_frame = data[data["Nombre"] == args["node"]]
+    return json.dumps(sprint_3(row_frame, data, int(args["size"]) if "size" in args else len(data)))
 if __name__ == "__main__":
     app.run(debug=True)
